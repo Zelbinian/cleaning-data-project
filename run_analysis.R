@@ -1,3 +1,5 @@
-features <- read.delim("features.txt", sep = "", header = F)
-testData <- read.delim("test/X_test.txt", sep = "", header = F)
-trainData <- read.delim("train/X_train.txt", sep = "", header = F)
+# load in each of the data sets; they don't have headers, so header = F is necessary
+
+features <- read.table("features.txt", header = F)
+testData <- read.table("test/X_test.txt", header = F)
+trainData <- read.table("train/X_train.txt", header = F)
