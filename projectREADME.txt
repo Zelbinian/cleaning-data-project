@@ -2,7 +2,8 @@ Steps
 ---
 1. Downloaded the folder with the data from the Getting & Cleaning Data Course Project Page
 2. Extracted the entire contents of the compressed folder
-3. Load the "features" file with read.delim(header = F)
+	a. set the R working directory to match the directory of the download
+3. Load the "features" file with read.delim(sep="", header = F)
 4. Transpose it using t() so it can be used for column names
 5. For each data set (training and test)
     a. read in the data set using read.delim(header = F)
