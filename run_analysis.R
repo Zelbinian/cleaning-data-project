@@ -21,3 +21,12 @@ stdCols <- grep("std\\(\\)", names(fullData))
 
 # putting them together into one vector and then subsetting with it
 meansAndStds <- fullData[, c(meanCols, stdCols)]
+
+# Next, pull in the activity data, combine it, and rework it from a numeric to a 
+# named factor variable
+
+testAct <- read.table("test/y_test.txt", header = F)
+trainAct <- read.table("train/y_train.txt", header = F)
+
+activities <- c(testAct[,1], trainAct[,1])
+activities <- factor(activities, labels = c("Walking", "Upstairs", "Downstairs", "Standing", "Sitting", "Laying"))
