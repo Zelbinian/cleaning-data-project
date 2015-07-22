@@ -1,5 +1,5 @@
 # load in each of the data sets; they don't have headers, so header = F is necessary
 
-features <- read.table("features.txt", header = F)
+varNames <- read.table("features.txt", header = F)
 testData <- read.table("test/X_test.txt", header = F)
 trainData <- read.table("train/X_train.txt", header = F)
