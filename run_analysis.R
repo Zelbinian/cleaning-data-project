@@ -22,11 +22,13 @@ stdCols <- grep("std\\(\\)", names(rawData))
 # putting them together into one vector and then subsetting with it
 cleanData <- rawData[, c(meanCols, stdCols)]
 
-# Next, pull in the activity data, combine it, and rework it from a numeric to a 
-# named factor variable
+# Next, our clean data needs a column telling us which activity each row represents
 
+# read in the numerical activity labels for both data sets
 testAct <- read.table("test/y_test.txt", header = F)
 trainAct <- read.table("train/y_train.txt", header = F)
 
-activities <- c(testAct[,1], trainAct[,1])
-activities <- factor(activities, labels = c("walking", "upstairs", "downstairs", "standing", "sitting", "laying"))
+                                    # adding an activity column to the dataframe
+cleanData$activity <- factor(       # which is a factor variable I'm creating
+    c(testAct[,1], trainAct[,1]),   # from a combined vector of activity labels
+    labels = c("walking", "upstairs", "downstairs", "standing", "sitting", "laying"))
