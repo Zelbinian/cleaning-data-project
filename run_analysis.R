@@ -22,13 +22,13 @@ cleanData <- rawData[, c(meanCols, stdCols)]
 
 # Next, our clean data needs a column telling us which activity each row represents
 
-# read in the numerical activity labels for both data sets
-trainAct <- read.table("train/y_train.txt", header = F)
-testAct <- read.table("test/y_test.txt", header = F)
+# read in the numerical activity labels for both data sets and combine them into a vector
+activity <- c(read.table("train/y_train.txt", header = F)[,1], #training data
+              read.table("test/y_test.txt", header = F)[,1])   #test data
 
                                     # adding an activity column to the dataframe
 cleanData$activity <- factor(       # which is a factor variable I'm creating
-    c(trainAct[,1], testAct[,1]),   # from a combined vector of activity labels
+    activity,                       # from a combined vector of activity labels
     labels = c("walking", "upstairs", "downstairs", "standing", "sitting", "laying"))
 
 # fixing some typos in the column names from the original dataset
@@ -36,9 +36,9 @@ names(cleanData)[grep("BodyBody", colnames(cleanData))] <-
     c("fBodyAccJerkMag-mean()", "fBodyGyroMag-mean()", "fBodyGyroJerkMag-mean()",
       "fBodyAccJerkMag-std()", "fBodyGyroMag-std()", "fBodyGyroJerkMag-std()")
 
-# loading in the subject data from the training and test files, combining them into one df
+# loading in the subject data from the training and test files, combining them into a vector
 subjects <- c(read.table("train/subject_train.txt", header = F)[,1], #training data
               read.table("test/subject_test.txt", header = F)[,1])   #test data
 
 # attaching subject data to the data frame
-cleanData$subjects <- factor(subjects)
+cleanData$subject <- factor(subjects)
