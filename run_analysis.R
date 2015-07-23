@@ -32,3 +32,8 @@ trainAct <- read.table("train/y_train.txt", header = F)
 cleanData$activity <- factor(       # which is a factor variable I'm creating
     c(testAct[,1], trainAct[,1]),   # from a combined vector of activity labels
     labels = c("walking", "upstairs", "downstairs", "standing", "sitting", "laying"))
+
+# fixing some typos in the column names from the original dataset
+names(cleanData)[grep("BodyBody", colnames(cleanData))] <- 
+    c("fBodyAccJerkMag-mean()", "fBodyGyroMag-mean()", "fBodyGyroJerkMag-mean()",
+      "fBodyAccJerkMag-std()", "fBodyGyroMag-std()", "fBodyGyroJerkMag-std()")
