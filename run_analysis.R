@@ -1,9 +1,9 @@
 # load in in the raw data sets; they don't have headers, so overriding the default
-testData <- read.table("test/X_test.txt", header = F)
 trainData <- read.table("train/X_train.txt", header = F)
+testData <- read.table("test/X_test.txt", header = F)
 
 # combining them into one data frame
-rawData <- rbind(testData, trainData)
+rawData <- rbind(trainData, testData)
 
 # the column headers are stored in the features file
 # this reads it in, and then sets that column to be the column names for the data
@@ -25,15 +25,16 @@ cleanData <- rawData[, c(meanCols, stdCols)]
 # Next, our clean data needs a column telling us which activity each row represents
 
 # read in the numerical activity labels for both data sets
-testAct <- read.table("test/y_test.txt", header = F)
 trainAct <- read.table("train/y_train.txt", header = F)
+testAct <- read.table("test/y_test.txt", header = F)
 
                                     # adding an activity column to the dataframe
 cleanData$activity <- factor(       # which is a factor variable I'm creating
-    c(testAct[,1], trainAct[,1]),   # from a combined vector of activity labels
+    c(trainAct[,1], testAct[,1]),   # from a combined vector of activity labels
     labels = c("walking", "upstairs", "downstairs", "standing", "sitting", "laying"))
 
 # fixing some typos in the column names from the original dataset
 names(cleanData)[grep("BodyBody", colnames(cleanData))] <- 
     c("fBodyAccJerkMag-mean()", "fBodyGyroMag-mean()", "fBodyGyroJerkMag-mean()",
       "fBodyAccJerkMag-std()", "fBodyGyroMag-std()", "fBodyGyroJerkMag-std()")
+
