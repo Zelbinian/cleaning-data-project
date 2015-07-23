@@ -37,5 +37,8 @@ names(cleanData)[grep("BodyBody", colnames(cleanData))] <-
       "fBodyAccJerkMag-std()", "fBodyGyroMag-std()", "fBodyGyroJerkMag-std()")
 
 # loading in the subject data from the training and test files, combining them into one df
-subjects <- c(read.table("train/subject_train.txt", header = F), #training data
-              read.table("test/subject_test.txt", header = F))   #test data
+subjects <- c(read.table("train/subject_train.txt", header = F)[,1], #training data
+              read.table("test/subject_test.txt", header = F)[,1])   #test data
+
+# attaching subject data to the data frame
+cleanData$subjects <- factor(subjects)
