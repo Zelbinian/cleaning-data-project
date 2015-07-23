@@ -1,9 +1,7 @@
 # load in in the raw data sets; they don't have headers, so overriding the default
-trainData <- read.table("train/X_train.txt", header = F)
-testData <- read.table("test/X_test.txt", header = F)
-
 # combining them into one data frame
-rawData <- rbind(trainData, testData)
+rawData <- rbind(read.table("train/X_train.txt", header = F), #training data
+                 read.table("test/X_test.txt", header = F))   #test data
 
 # the column headers are stored in the features file
 # this reads it in, and then sets that column to be the column names for the data
@@ -38,5 +36,6 @@ names(cleanData)[grep("BodyBody", colnames(cleanData))] <-
     c("fBodyAccJerkMag-mean()", "fBodyGyroMag-mean()", "fBodyGyroJerkMag-mean()",
       "fBodyAccJerkMag-std()", "fBodyGyroMag-std()", "fBodyGyroJerkMag-std()")
 
-subjects <- c(read.table("train/subject_train.txt", header = F), 
-              read.table("test/subject_test.txt", header = F))
+# loading in the subject data from the training and test files, combining them into one df
+subjects <- c(read.table("train/subject_train.txt", header = F), #training data
+              read.table("test/subject_test.txt", header = F))   #test data
