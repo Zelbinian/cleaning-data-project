@@ -38,3 +38,5 @@ names(cleanData)[grep("BodyBody", colnames(cleanData))] <-
     c("fBodyAccJerkMag-mean()", "fBodyGyroMag-mean()", "fBodyGyroJerkMag-mean()",
       "fBodyAccJerkMag-std()", "fBodyGyroMag-std()", "fBodyGyroJerkMag-std()")
 
+subjects <- c(read.table("train/subject_train.txt", header = F), 
+              read.table("test/subject_test.txt", header = F))
