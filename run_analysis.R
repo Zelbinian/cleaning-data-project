@@ -66,3 +66,4 @@ write.table(dcast(melted, subject + activity ~ variable, mean), "tidyData.txt", 
 
 # clean up on aisle 3
 unlink(c("gyroData.zip", "UCI HAR Dataset"), T)
+rm(list = ls())
