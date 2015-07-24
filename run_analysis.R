@@ -61,5 +61,6 @@ cleanData$subject <- factor(subjects)
 # first melting based on the factor variables
 melted <- melt(cleanData, id=c(67:68), measure=c(1:66))
 # then recasting by applying the mean function to every variable, based on each
-# activty/subject group
-finalData <- dcast(melted, subject + activity ~ variable, mean)
+# activty/subject group and then writing the data to a file in the directory we started in
+setwd("./..")
+write.table(dcast(melted, subject + activity ~ variable, mean), "tidyData.txt", row.names = F)
