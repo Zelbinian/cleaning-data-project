@@ -57,10 +57,12 @@ subjects <- c(read.table("train/subject_train.txt", header = F)[,1], #training d
 # attaching subject data to the data frame
 cleanData$subject <- factor(subjects)
 
-#tidying it up by melting and recasting
+# tidying it up by melting and recasting
 # first melting based on the factor variables
 melted <- melt(cleanData, id=c(67:68), measure=c(1:66))
-# then recasting by applying the mean function to every variable, based on each
-# activty/subject group and then writing the data to a file in the directory we started in
+# then writing a recasted dataset into a text file in the original directory
 setwd("./..")
 write.table(dcast(melted, subject + activity ~ variable, mean), "tidyData.txt", row.names = F)
+
+# clean up on aisle 3
+unlink(c("gyroData.zip", "UCI HAR Dataset/"), T)
