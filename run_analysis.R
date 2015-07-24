@@ -1,4 +1,13 @@
-# TODO: check to see if current directory has the data
+# check to see if current directory has the data, if not download it
+filesNeeded <- c("train/X_train.txt","test/X_test.txt","features.txt",
+                 "train/y_train.txt","test/y_test.txt","train/subject_train.txt",
+                 "test/subject_test.txt")
+if(!all(file.exists(filesNeeded))) {
+    download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip",
+                  "gyroData.zip")
+    unzip("gyroData.zip", files = paste0("UCI HAR Dataset/",filesNeeded), overwrite = T)
+    setwd("UCI HAR Dataset/")
+    }
 
 # loading necessary libraries
 library(reshape2)
