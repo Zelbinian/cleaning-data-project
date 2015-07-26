@@ -2,11 +2,15 @@
 filesNeeded <- c("train/X_train.txt","test/X_test.txt","features.txt",
                  "train/y_train.txt","test/y_test.txt","train/subject_train.txt",
                  "test/subject_test.txt")
+
+downloaded = F # helps the script know if it needs to perform cleanup operations
+
 if(!all(file.exists(filesNeeded))) {
     download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip",
                   "gyroData.zip")
     unzip("gyroData.zip", files = paste0("UCI HAR Dataset/",filesNeeded), overwrite = T)
     setwd("UCI HAR Dataset/")
+    downloaded = T
     }
 
 # loading necessary libraries
@@ -60,10 +64,14 @@ cleanData$subject <- factor(subjects)
 # tidying it up by melting and recasting
 # first melting based on the factor variables
 melted <- melt(cleanData, id=c(67:68), measure=c(1:66))
-# then writing a recasted dataset into a text file in the original directory
-setwd("./..")
-write.table(dcast(melted, subject + activity ~ variable, mean), "tidyData.txt", row.names = F)
 
-# clean up on aisle 3
-unlink(c("gyroData.zip", "UCI HAR Dataset"), T)
+# this needs to be done first so we don't write the data to the wrong place
+if (downloaded) {
+    setwd("./..")
+    unlink(c("gyroData.zip", "UCI HAR Dataset"), T)
+}
+
+# writing a recasted dataset into a text file
+write.table(dcast(melted, subject + activity ~ variable, mean), "tidyData.txt", row.names = F)
+# cleaning up the R environment
 rm(list = ls())
