@@ -32,9 +32,10 @@ The variable names come from the original dataset. This data scientist has chose
 This is not a full list of all 68 variables, but rather a way to help you decode what the variable names mean.
 Notes:
 1. The suffix '-XYZ' is short hand for there being one variable for each dimension. E.g. When you see tBodyAcc-XYZ this is actually 3 variables in the tidy dataset, tBodyAcc-X, tBodyAcc-Y, and tBodyAcc-Z.
-2. Each variable in the dataset is a mean of means (demarcated by a "-mean()" suffix in the data) for each participant, or a mean of standard deviations (demarcated by a "-std()" suffice in the data).
+2. Each variable in the dataset is a mean of means (demarcated by a "-mean()" suffix in the data), or a mean of standard deviations (demarcated by a "-std()" suffice in the data).
 
-
+subject - a numerical factor uniquely identifying one subject
+activity - a factor indicating what type of activity the subject was performing at the time measurements were taken
 tBodyAcc-XYZ			
 tGravityAcc-XYZ
 tBodyAccJerk-XYZ
