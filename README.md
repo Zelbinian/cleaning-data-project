@@ -22,15 +22,18 @@ If you have not:
 5. Adds an activity column to the dataset. It reads in the activity training and test data, combines them into a single vector, converts it into a character factor variable, and then sets it to a new column in the dataset.
 6. Adds a subject column to the dataset in a similar manner.
 7. Melts and recasts the data (using the reshape2 commands) based on the activity and subject factor variables, creating a new dataset that averages all of the other columns for each unique subject/activity pair.
+8. The script then cleans up the r environment and any files it may have downloaded. (If run from inside the root of an already-downloaded and unpacked dataset, unlink won't find the files it's trying to unlink, so it will do nothing.)
 
 # Codebook
 
 The variable names come from the original dataset. This data scientist has chosen not to rename or re-represent data that he doesn't totally understand. The variables stand for various types of measurements from accelerometers and gyroscopes. I have included the write up from the original readme below for those interested in the details of what the variable names might mean.
 
 ## Variables in the tidy data set
+This is not a full list of all 68 variables, but rather a way to help you decode what the variable names mean.
 Notes:
 1. The suffix '-XYZ' is short hand for there being one variable for each dimension. E.g. When you see tBodyAcc-XYZ this is actually 3 variables in the tidy dataset, tBodyAcc-X, tBodyAcc-Y, and tBodyAcc-Z.
 2. Each variable in the dataset is a mean of means (demarcated by a "-mean()" suffix in the data) for each participant, or a mean of standard deviations (demarcated by a "-std()" suffice in the data).
+
 
 tBodyAcc-XYZ			
 tGravityAcc-XYZ
